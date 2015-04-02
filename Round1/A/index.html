@@ -1,0 +1,99 @@
+<html>
+	<head>
+		<title>Round ##</title>
+		<meta name='author' content='Josh Gibbs' />
+		<script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount', 'UA-31002145-1']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();</script>
+		<script language='JavaScript' type='text/javascript'>
+			//var input = ['1', '4', '7.5', '10.5', '14', '17.5', '20.5', '24', '27.5', '30.5', '34', '37.5']
+
+			var X = 0,
+					input,
+					S = '',
+					startTime = new Date().getTime(),
+					max, min;
+
+				var time = [];
+				var C = [];
+				var Te;
+				var N;
+			function init() {
+				C[0] = [];
+				C[1] = [];
+				/*var X = 0,
+					*/input = document.getElementById('in').value.split(/\r?\n?\s/g)
+					/*S = '',
+					startTime = new Date().getTime(),
+					max, min;
+
+				var time = [];
+				var C = []; //[ {v: 5, d: 10}, {v: 100, d: 0} ] [ /*no cars are in the right lane ] ];*/
+
+				Te = parseInt(input.splice(0,1)[0]);
+				for (var i = 0; i < Te; i++) {
+					N = parseInt(input.splice(0,1)[0]);
+					for (var j = 0; j < N; j++) {
+						if (input[0] == 'L') {
+							C[0].push({v:parseInt(input.splice(0,1)[0]),d:parseInt(input.splice(0,1)[0])});
+						} else {
+							C[1].push({v:parseInt(input.splice(0,1)[0]),d:parseInt(input.splice(0,1)[0])});
+						};
+
+
+						//goes through left and right
+						for (var s = 0; s < 2; s++){
+							//goes through all of the left cars
+							for (var i = 0; i < C[s%2].length; i++) {
+								//goes through all of the other left cars
+								for (var j = 0; j < C[s%2].length; j++) {
+									if ( i != j ) {
+										//checks if there is a collision
+										var t = ( C[s%2][i].d - C[s%2][j].d ) / ( C[s%2][j].v - C[s%2][i].v ); //Time to collision
+										if ( t > 0 ) {
+											//checks all of right cars to see if they collide
+											for (var h = 0; h < C[(s+1)%2].length; h++) {
+												var di = C[s%2][i].d + C[s%2][i].v * t; // car i at t
+												var dh = C[s%2][h].d + C[s%2][h].v * t; // car h at t
+												// if the cars collide, set the collision time
+												if ( di < dh + 5 && di > dh - 5 ) {
+													if ( t < time[i] ) {
+														time[i] = t;
+														break;
+													};
+												};
+											};
+											//moves left car to the right if there was a no collision
+											if ( !time[i] ) {
+												C[(s+1)%2].push(C[s%2].splice(i--, 1)[0]);
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+
+					S += 'Case #' + ++X + ': ' + Math.round(time[i]) + '\n';
+					C[0] = [];
+					C[1] = [];
+
+				};
+
+
+				document.getElementById('out').innerText = S;
+				document.getElementById('outtime').innerText = 'Output - ' + ( new Date().getTime() - startTime ) + 'ms'; 
+			};
+			
+		
+		</script>
+	</head>
+	<body>
+		Input
+		<input type='button' value='Solve' onclick="init()">
+		<br>
+		<textarea id='in'></textarea>
+		<hr>
+		<div id='outtime'>Output - 0ms</div>
+		<br>
+		<code id='out'></code>
+	</body>
+</html>

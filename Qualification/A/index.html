@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<title>Problem A. Speaking in Tongues</title>
+		<meta name='author' content='Josh Gibbs' />
+		<!--http://code.google.com/codejam/contest/1460488/dashboard#s=p0-->
+		<script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount', 'UA-31002145-1']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();</script>
+		<script language='JavaScript' type='text/javascript'>
+
+			var key = [];
+			window.onload = function() {
+				var goo = 'ejp mysljylc kd kxveddknmc re jsicpdrysi rbcpc ypc rtcsra dkh wyfrepkym veddknkmkrkcd de kr kd eoya kw aej tysr re ujdr lkgc jv q z';
+				var eng = 'our language is impossible to understand there are twenty six factorial possibilities so it is okay if you want to just give up z q';
+				for ( var n = 0; n < goo.length; n++ ) {
+					key[goo[n]] = eng[n];
+				};
+			};
+
+			function init() {
+
+				var X = 0,
+					input = document.getElementById('in').value.split(/\r?\n/g),
+					T = parseInt(input[0]),
+					S = '',
+					startTime = new Date().getTime();
+
+				for ( var h = 1; h <= T; h++ ) {
+
+					var output = '';
+
+					for ( var i = 0; i < input[h].length; i++ ) {
+						output += key[input[h][i]];
+					};
+
+					S += 'Case #' + ++X + ': ' + output + '\n';
+
+				};
+				
+				document.getElementById('out').innerText = S;
+				document.getElementById('outtime').innerText = 'Output - ' + ( new Date().getTime() - startTime ) + 'ms'; 
+			};
+		
+		</script>
+	</head>
+	<body>
+		Input
+		<input type='button' value='Translate' onclick="out.innerText='';init()">
+		<br>
+		<textarea id='in'></textarea>
+		<hr>
+		<div id='outtime'>Output - 0ms</div>
+		<br>
+		<code id='out'></code>
+	</body>
+</html>

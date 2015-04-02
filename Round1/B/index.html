@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Round 1B</title>
+		<meta name='author' content='Josh Gibbs'>
+		<script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount', 'UA-31002145-1']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();</script>
+		<script type='text/javascript'>
+			var input;
+			function init() {
+				var S = '';
+				input = document.getElementById('in').value.split(/\r?\n?\s/g);
+				
+				var T = parseInt(input.splice(0,1)[0]);
+				for (var i = 0; i < T; i++) {
+					S = "Case #" + (i + 1) + ": " + solve() + "\n";
+					document.getElementById('out').innerText += S;
+				};
+			};
+				
+			function solve() {
+					var N = parseInt(input.splice(0,1)[0]);
+					var x = [];
+					var sx = 0;
+					for (var i = 0; i < N; i++) {
+						x[i] = parseInt(input.splice(0,1));
+						sx += x[i];
+					};
+					var res = "";
+					for (var i = 0; i < N; i++) {
+						var l = 0;
+						var r = 0;
+						while ( r > l + 1e-15) {
+							var m = (l + r) * 0.5;
+							var z = x[i] + m * sx;
+							var s = 0;
+							for (var j = 0; j < N; j++) if (j != i) {
+								if (x[j] < z) {
+									var dx = z - x[j];
+									s += dx / sx;
+								};
+							};
+							if (s > 1 - m) {
+								r = m;
+							} else {
+								l = m;
+							};
+						};
+						res += (l * 100) + " ";
+					};
+					return res;
+				};
+				
+		
+		
+			/*function init() {
+				var X = 0,
+					input = document.getElementById('in').value.split(/\r?\n?\s/g),
+					S = [],
+					startTime = new Date().getTime(),
+					max, min;
+					
+				var T = input.splice(0,1)[0];
+				for ( var t = 0; t < T; t++ ) {
+					
+					var negs = 0;
+					
+					var N = input.splice(0,1)[0];
+					
+					var test = input.splice(0,N);
+					
+					var sum = 0;
+					for ( var s = 0; s < test.length; s++) {
+						sum += parseInt( test[s] );
+					};
+					
+					var l = '';
+					var reCalc = [];
+					console.log(test)
+					//checks for negatives
+					for ( var s = 0; s < test.length; s++ ) {
+					
+						var c = ( ( ( ( sum * 2 / test.length ) - parseInt(test[s]) ) / sum ) * 100);
+						if ( c < 0 ) {
+							negs++;
+						} else {
+							l += c;
+						};
+						reCalc.push(c);
+						
+					};
+					console.log(test)
+					if ( negs ) {
+						l = '';
+						for ( var r = 0; r < reCalc.length; r++ ) {
+							
+							if ( reCalc[r] > 0 ) {
+								l += ( ( ( ( sum * 2 / ( reCalc.length - negs ) ) - parseInt(test[r]) ) / sum ) * 100) + ' ';
+							} else {
+								l += '0 ';
+							};
+						
+						};
+					};
+					
+					S += 'Case #' + ++X + ': ' + l + '\n';
+					
+					
+				
+				};
+				
+
+				// Algorithm
+
+				document.getElementById('out').innerText = S;
+				document.getElementById('outtime').innerText = 'Output - ' + ( new Date().getTime() - startTime ) + 'ms'; 
+
+			};*/
+		
+		</script>
+	</head>
+	<body>
+		<div>
+			Input
+			<input type='button' value='Solve' onclick="init()">
+			<br>
+			<textarea id='in' rows='5' cols='30'></textarea>
+			<hr>
+			<div id='outtime'>Output - 0ms</div>
+			<br>
+			<code id='out'></code>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<title>Round ##</title>
+		<meta name='author' content='Josh Gibbs' />
+		<script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount', 'UA-31002145-1']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();</script>
+		<script language='JavaScript' type='text/javascript'>
+			var input;
+			function init() {
+				var S = '';
+				input = document.getElementById('in').value.split(/\r?\n?\s/g);
+				
+				var T = parseInt(input.splice(0,1)[0]);
+				for (var i = 0; i < T; i++) {
+					S = "Case #" + (i + 1) + ": " + solve() + "\n";
+					document.getElementById('out').innerText += S;
+				};
+			};
+				
+			function solve() {
+					var D = parseInt(input.splice(0,1)[0]);
+					var N = parseInt(input.splice(0,1)[0]);
+					var A = parseInt(input.splice(0,1)[0]);
+					var t = x = a = [];
+					for (var i = 0; i < N; i++) {
+						t[N] = parseInt(input.splice(0,1)[0]);
+						x[N] = parseInt(input.splice(0,1)[0]);
+					};
+					for (var i = 0; i < A; i++) {
+						a.push(parseInt(input.splice(0,1)[0]));
+					};
+
+
+					 x2 / v1 - v2 = t
+					0.5*a*t^2 = d@t 
+				};
+
+			
+		
+		</script>
+	</head>
+	<body>
+		Input
+		<input type='button' value='Solve' onclick="init()">
+		<br>
+		<textarea id='in'></textarea>
+		<hr>
+		<div id='outtime'>Output - 0ms</div>
+		<br>
+		<code id='out'></code>
+	</body>
+</html>
